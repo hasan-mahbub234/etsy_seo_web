@@ -1,0 +1,52 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ArrowRight, Star, Shield } from "lucide-react";
+
+export const CTA = () => {
+  return (
+    <section className="py-20 bg-gradient-to-br from-primary/20 via-secondary to-secondary">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl sm:text-5xl font-bold mb-6">
+            THE TOOL THAT TOP <span className="text-primary">0.1%</span> SELLERS
+            USE
+          </h2>
+          <p className="text-xl text-gray-300 mb-8">
+            Join thousands of successful Etsy sellers who have transformed their
+            business
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <button className="bg-primary hover:bg-orange-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 inline-flex items-center gap-2">
+              Rank My Product <ArrowRight size={20} />
+            </button>
+            <button className="border border-white/20 hover:border-primary px-8 py-4 rounded-lg font-semibold text-lg transition-all">
+              Watch Demo
+            </button>
+          </div>
+
+          <div className="flex flex-wrap gap-6 justify-center text-sm text-gray-400">
+            <div className="flex items-center gap-2">
+              <Star className="w-4 h-4 text-yellow-500" />
+              <span>30-Day Money Back</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Shield className="w-4 h-4 text-green-500" />
+              <span>99.5% Success Rate</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-primary rounded-full" />
+              <span>1,000+ Happy Clients</span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
