@@ -36,12 +36,8 @@ export const Stats = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-8">
           {stats.map((stat, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
               className="text-center p-3 sm:p-4 md:p-6 rounded-2xl bg-dark/50 backdrop-blur-sm border border-white/10 hover:border-primary/50 transition-all"
             >
               <stat.icon className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-primary mx-auto mb-2 sm:mb-3 md:mb-4" />
@@ -54,7 +50,7 @@ export const Stats = () => {
               <div className="text-[10px] sm:text-xs text-gray-500">
                 {stat.description}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

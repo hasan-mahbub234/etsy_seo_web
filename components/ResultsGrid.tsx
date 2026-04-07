@@ -38,30 +38,19 @@ export const ResultsGrid = () => {
   return (
     <section className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Results Our Clients Achieved
           </h2>
           <p className="text-gray-400 text-lg">
             Real data from real Etsy sellers
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           {results.map((result, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.02 }}
               className="group relative rounded-2xl overflow-hidden cursor-pointer"
             >
               <img
@@ -77,7 +66,7 @@ export const ResultsGrid = () => {
                 <h3 className="text-xl font-semibold mb-1">{result.title}</h3>
                 <p className="text-gray-300">{result.description}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
