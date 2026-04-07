@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X, TrendingUp, ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import RankingModal from "./RankingModal";
@@ -32,11 +32,9 @@ export const Navbar = () => {
 
   const isActiveLink = (href: string) => {
     if (href === "/calculator") return pathname === "/calculator";
-    // For hash links, just check if we're on the home page
     return pathname === "/";
   };
 
-  // Smooth scroll function for hash links
   const handleHashLinkClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
@@ -47,7 +45,6 @@ export const Navbar = () => {
       const element = document.getElementById(hash);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
-        // Update URL without causing a page jump
         window.history.pushState(null, "", href);
       }
     }
@@ -65,13 +62,11 @@ export const Navbar = () => {
         >
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
-              {/* Logo - Links to home */}
               <Link href="/" className="flex items-center space-x-2">
                 <TrendingUp className="w-8 h-8 text-primary" />
                 <span className="text-xl font-bold">RankEtsy</span>
               </Link>
 
-              {/* Desktop Navigation */}
               <div className="hidden md:flex items-center space-x-8">
                 {navLinks.map((link) => (
                   <Link
@@ -87,7 +82,6 @@ export const Navbar = () => {
                 ))}
               </div>
 
-              {/* Desktop CTA */}
               <button
                 onClick={() => setIsModalOpen(true)}
                 className="bg-primary hidden md:inline-flex hover:bg-orange-600 px-4 py-2 rounded-full font-semibold text-base transition-all transform hover:scale-105 items-center gap-2 shadow-lg"
@@ -95,7 +89,6 @@ export const Navbar = () => {
                 Rank My Product <ArrowRight size={18} />
               </button>
 
-              {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMobileMenuOpen((prev) => !prev)}
                 className="md:hidden text-white p-2"
@@ -104,7 +97,6 @@ export const Navbar = () => {
               </button>
             </div>
 
-            {/* Mobile Menu */}
             <AnimatePresence>
               {isMobileMenuOpen && (
                 <div className="md:hidden overflow-hidden border-t border-white/10">

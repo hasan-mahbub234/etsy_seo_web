@@ -1,18 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowRight, Star, Shield } from "lucide-react";
 
 export const CTA = () => {
   return (
     <section className="py-20 bg-gradient-to-br from-primary/20 via-secondary to-secondary">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
+        <div>
           <h2 className="text-3xl sm:text-5xl font-bold mb-6">
             THE TOOL THAT TOP <span className="text-primary">0.1%</span> SELLERS
             USE
@@ -45,7 +39,7 @@ export const CTA = () => {
               <span>1,000+ Happy Clients</span>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

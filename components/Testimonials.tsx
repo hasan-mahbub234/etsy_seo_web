@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Star, MessageCircle, CheckCircle } from "lucide-react";
 
 const chatTestimonials = [
@@ -58,20 +57,14 @@ export const Testimonials = () => {
   return (
     <section className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Trusted by 1,000+ Sellers
           </h2>
           <p className="text-gray-400 text-lg">
             Real reviews from real Etsy entrepreneurs
           </p>
-        </motion.div>
+        </div>
 
         {/* Chat-style testimonials */}
         <div className="mb-12">
@@ -81,12 +74,8 @@ export const Testimonials = () => {
           </h3>
           <div className="grid md:grid-cols-3 gap-6">
             {chatTestimonials.map((testimonial, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
                 className="bg-dark rounded-2xl p-4 border border-white/10"
               >
                 <div className="flex items-start gap-3">
@@ -109,7 +98,7 @@ export const Testimonials = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -119,14 +108,9 @@ export const Testimonials = () => {
           <h3 className="text-xl font-semibold mb-6">Featured Reviews</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {reviewCards.map((review, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
-                className="p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-dark border border-white/10 hover:border-primary/50 transition-all"
+                className="p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-dark border border-white/10 hover:border-primary/50 transition-all hover:-translate-y-1"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center font-bold text-lg">
@@ -141,7 +125,7 @@ export const Testimonials = () => {
                   {"★".repeat(review.rating)}
                 </div>
                 <p className="text-gray-300">{review.review}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
