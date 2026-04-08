@@ -18,13 +18,13 @@ const stats = [
   },
   {
     icon: Package,
-    value: "7,437+",
-    label: "listings optimized",
+    value: "2,000+",
+    label: "listings ranked",
     description: "And counting",
   },
   {
     icon: Star,
-    value: "210+",
+    value: "318+",
     label: "reviews",
     description: "5-star rated",
   },

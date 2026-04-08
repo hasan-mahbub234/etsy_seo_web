@@ -6,6 +6,7 @@ import RankingModal from "./RankingModal";
 
 export const CTA = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section className="py-20 bg-gradient-to-br from-primary/20 via-secondary to-secondary">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -18,28 +19,31 @@ export const CTA = () => {
             Join thousands of successful Etsy sellers who have transformed their
             business
           </p>
-
+          {/* CTA Button */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-primary hover:bg-orange-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 inline-flex items-center gap-2"
+              className="w-full sm:w-auto bg-primary hover:bg-orange-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 flex items-center justify-center gap-2 text-center"
             >
-              Rank My Product <ArrowRight size={20} />
+              <span className="text-center">Rank My Product</span>
+              <ArrowRight size={20} />
             </button>
           </div>
-
-          <div className="flex flex-wrap gap-6 justify-center text-sm text-gray-400">
+          {/* Trust Badges */}
+          <div className="flex flex-wrap max-sm:gap-2 gap-6 justify-center text-sm text-gray-400">
             <div className="flex items-center gap-2">
               <Star className="w-4 h-4 text-yellow-500" />
               <span>30-Day Money Back</span>
             </div>
+
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4 text-green-500" />
               <span>99.5% Success Rate</span>
             </div>
+
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-primary rounded-full" />
-              <span>1,000+ Happy Clients</span>
+              <span>318+ Happy Clients</span>
             </div>
           </div>
         </div>

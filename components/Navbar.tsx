@@ -34,14 +34,10 @@ export const Navbar = () => {
   const scrollToSection = (elementId: string) => {
     const element = document.getElementById(elementId);
     if (element) {
-      const offset = 80; // Account for fixed navbar
+      const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
     }
   };
 
@@ -54,20 +50,14 @@ export const Navbar = () => {
     if (link.href === "/calculator") {
       router.push("/calculator");
     } else if (link.id) {
-      // If we're not on the homepage, navigate to home first then scroll
       if (pathname !== "/") {
         router.push(`/#${link.id}`);
-        // Wait for navigation then scroll
-        setTimeout(() => {
-          scrollToSection(link.id);
-        }, 100);
+        setTimeout(() => scrollToSection(link.id), 100);
       } else {
-        // Already on homepage, just scroll
         scrollToSection(link.id);
         window.history.pushState(null, "", `/#${link.id}`);
       }
     }
-
     setIsMobileMenuOpen(false);
   };
 
@@ -83,43 +73,63 @@ export const Navbar = () => {
         >
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
-              <Link href="/" className="flex items-center space-x-2">
-                <TrendingUp className="w-8 h-8 text-primary" />
-                <span className="text-xl font-bold">RankEtsy</span>
+              <Link
+                href="/"
+                className="flex items-center space-x-2"
+                aria-label="ListMagic Home"
+              >
+                <img
+                  src="/images/logo.png"
+                  alt="List Magic"
+                  className="max-sm:w-20 max-sm:h-10 w-32 h-16 object-cover rounded-full"
+                />
               </Link>
 
-              <div className="hidden md:flex items-center space-x-8">
+              <nav
+                className="hidden md:flex items-center space-x-8"
+                aria-label="Main Navigation"
+              >
                 {navLinks.map((link) => (
                   <a
                     key={link.name}
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link)}
                     className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+                    aria-label={`Go to ${link.name}`}
                   >
                     {link.name}
                   </a>
                 ))}
-              </div>
+              </nav>
 
               <button
                 onClick={() => setIsModalOpen(true)}
                 className="bg-primary hidden md:inline-flex hover:bg-orange-600 px-4 py-2 rounded-full font-semibold text-base transition-all transform hover:scale-105 items-center gap-2 shadow-lg"
+                aria-label="Rank My Product - Open form"
               >
-                Rank My Product <ArrowRight size={18} />
+                Rank My Product <ArrowRight size={18} aria-hidden="true" />
               </button>
 
               <button
                 onClick={() => setIsMobileMenuOpen((prev) => !prev)}
                 className="md:hidden text-white p-2"
+                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               >
-                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {isMobileMenuOpen ? (
+                  <X size={24} aria-hidden="true" />
+                ) : (
+                  <Menu size={24} aria-hidden="true" />
+                )}
               </button>
             </div>
 
             <AnimatePresence>
               {isMobileMenuOpen && (
                 <div className="md:hidden overflow-hidden border-t border-white/10">
-                  <div className="py-4 space-y-2">
+                  <nav
+                    className="py-4 space-y-2"
+                    aria-label="Mobile Navigation"
+                  >
                     {navLinks.map((link) => (
                       <a
                         key={link.name}
@@ -130,14 +140,13 @@ export const Navbar = () => {
                         {link.name}
                       </a>
                     ))}
-
                     <button
                       onClick={handleOpenModal}
                       className="w-full mt-3 bg-primary hover:bg-orange-600 px-5 py-3 rounded-lg font-semibold transition-all"
                     >
                       Rank My Product
                     </button>
-                  </div>
+                  </nav>
                 </div>
               )}
             </AnimatePresence>

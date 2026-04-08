@@ -95,7 +95,7 @@ export default function Calculator({ isFullPage = false }: Calculator) {
               label="Average Order Value"
               value={aov}
               setValue={setAov}
-              prefix="$"
+              prefix="$ "
             />
             <Input
               label="Current Monthly Sales"

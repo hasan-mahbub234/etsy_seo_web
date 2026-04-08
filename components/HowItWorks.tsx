@@ -17,12 +17,6 @@ const steps = [
     color: "from-purple-500/20 to-transparent",
   },
   {
-    icon: Calendar,
-    title: "Automation Scheduling",
-    description: "Automated rank tracking and optimization updates",
-    color: "from-green-500/20 to-transparent",
-  },
-  {
     icon: Trophy,
     title: "Guaranteed Results",
     description: "Page 1 ranking or your money back",
@@ -37,11 +31,11 @@ export const HowItWorks = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">How It Works</h2>
           <p className="text-gray-400 text-lg">
-            4 simple steps to dominate Etsy search
+            3 simple steps to dominate Etsy search
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {steps.map((step, index) => (
             <div
               key={index}

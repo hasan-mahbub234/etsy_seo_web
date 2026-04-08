@@ -46,17 +46,17 @@ const reviewCards = [
     name: "Alex Thompson",
     role: "Etsy Seller since 2019",
     review:
-      "This SEO tool transformed my business. From $2k to $8k monthly revenue in 3 months.",
+      "This SEO Ranking transformed my business. From $2k To $5.8k Monthly Revenue in less than 3 months.",
     rating: 5,
-    avatar: "AT",
+    avatar: "/images/men_1.jfif",
   },
   {
     name: "Jessica Williams",
     role: "Jewelry Shop Owner",
     review:
-      "The calculator helped me understand exactly what I was missing. Game changer!",
+      "This Ranking Service Was Exactly What I Was Missing, Game Changer!",
     rating: 5,
-    avatar: "JW",
+    avatar: "/images/women_1.jfif",
   },
   {
     name: "David Martinez",
@@ -64,7 +64,7 @@ const reviewCards = [
     review:
       "Support is amazing and results are guaranteed. Couldnt ask for more.",
     rating: 5,
-    avatar: "DM",
+    avatar: "/images/men_2.jfif",
   },
 ];
 
@@ -74,7 +74,7 @@ export const Testimonials = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Trusted by 1,000+ Sellers
+            Trusted by 318+ Sellers
           </h2>
           <p className="text-gray-400 text-lg">
             Real reviews from real Etsy entrepreneurs
@@ -113,8 +113,12 @@ export const Testimonials = () => {
                 className="p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-dark border border-white/10 hover:border-primary/50 transition-all hover:-translate-y-1"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center font-bold text-lg">
-                    {review.avatar}
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg">
+                    <img
+                      src={review.avatar}
+                      alt={`Client review ${index + 1}`}
+                      className="w-full h-full object-cover rounded-full"
+                    />
                   </div>
                   <div>
                     <div className="font-semibold">{review.name}</div>
