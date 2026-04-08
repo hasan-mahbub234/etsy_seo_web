@@ -1,28 +1,43 @@
 "use client";
 
-import { Star, MessageCircle, CheckCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
 const chatTestimonials = [
   {
-    name: "Sarah Johnson",
-    message:
-      "My sales increased by 340% in just 2 weeks! This tool is incredible! 🚀",
-    rating: 5,
-    avatar: "SJ",
+    image: "/images/section_2.1.jpeg",
   },
   {
-    name: "Mike Chen",
-    message:
-      "Finally found something that actually works. Page 1 ranking achieved!",
-    rating: 5,
-    avatar: "MC",
+    image: "/images/section_2.2.jpeg",
   },
   {
-    name: "Emma Davis",
-    message:
-      "Best investment I've made for my Etsy shop. The ROI is insane! 💰",
-    rating: 5,
-    avatar: "ED",
+    image: "/images/section_2.3.jpeg",
+  },
+  {
+    image: "/images/section_2.4.jpeg",
+  },
+  {
+    image: "/images/section_3.1.jpeg",
+  },
+  {
+    image: "/images/section_3.2.jpeg",
+  },
+  {
+    image: "/images/section_3.3.jpeg",
+  },
+  {
+    image: "/images/section_3.4.jpeg",
+  },
+  {
+    image: "/images/section_3.5.jpeg",
+  },
+  {
+    image: "/images/section_3.6.jpeg",
+  },
+  {
+    image: "/images/section_3.7.jpeg",
+  },
+  {
+    image: "/images/section_3.8.jpeg",
   },
 ];
 
@@ -55,7 +70,7 @@ const reviewCards = [
 
 export const Testimonials = () => {
   return (
-    <section className="py-20 bg-black">
+    <section id="testimonials" className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
@@ -76,28 +91,13 @@ export const Testimonials = () => {
             {chatTestimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="bg-dark rounded-2xl p-4 border border-white/10"
+                className="bg-dark rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-all hover:-translate-y-1"
               >
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center font-bold">
-                    {testimonial.avatar}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-semibold">{testimonial.name}</span>
-                      <div className="flex text-yellow-400">
-                        {"★".repeat(testimonial.rating)}
-                      </div>
-                    </div>
-                    <div className="bg-secondary rounded-lg p-3">
-                      <p className="text-sm">{testimonial.message}</p>
-                    </div>
-                    <div className="flex items-center gap-1 mt-2 text-xs text-gray-500">
-                      <CheckCircle className="w-3 h-3 text-green-500" />
-                      Verified Purchase
-                    </div>
-                  </div>
-                </div>
+                <img
+                  src={testimonial.image}
+                  alt={`Client review ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
               </div>
             ))}
           </div>

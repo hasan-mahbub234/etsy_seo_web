@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, TrendingUp, ArrowRight } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import RankingModal from "./RankingModal";
 
 export const Navbar = () => {
@@ -12,6 +12,7 @@ export const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -20,8 +21,8 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Reviews", href: "/#reviews" },
-    { name: "FAQ", href: "/#faq" },
+    { name: "Reviews", href: "/#testimonials", id: "testimonials" },
+    { name: "FAQ", href: "/#faq", id: "faq" },
     { name: "Calculator", href: "/calculator" },
   ];
 
@@ -30,24 +31,44 @@ export const Navbar = () => {
     setIsModalOpen(true);
   };
 
-  const isActiveLink = (href: string) => {
-    if (href === "/calculator") return pathname === "/calculator";
-    return pathname === "/";
+  const scrollToSection = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      const offset = 80; // Account for fixed navbar
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
   };
 
-  const handleHashLinkClick = (
+  const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    href: string,
+    link: (typeof navLinks)[0],
   ) => {
-    if (href.includes("#")) {
-      e.preventDefault();
-      const hash = href.split("#")[1];
-      const element = document.getElementById(hash);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-        window.history.pushState(null, "", href);
+    e.preventDefault();
+
+    if (link.href === "/calculator") {
+      router.push("/calculator");
+    } else if (link.id) {
+      // If we're not on the homepage, navigate to home first then scroll
+      if (pathname !== "/") {
+        router.push(`/#${link.id}`);
+        // Wait for navigation then scroll
+        setTimeout(() => {
+          scrollToSection(link.id);
+        }, 100);
+      } else {
+        // Already on homepage, just scroll
+        scrollToSection(link.id);
+        window.history.pushState(null, "", `/#${link.id}`);
       }
     }
+
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -69,16 +90,14 @@ export const Navbar = () => {
 
               <div className="hidden md:flex items-center space-x-8">
                 {navLinks.map((link) => (
-                  <Link
+                  <a
                     key={link.name}
                     href={link.href}
-                    onClick={(e) => handleHashLinkClick(e, link.href)}
-                    className={`text-gray-300 hover:text-white transition-colors ${
-                      isActiveLink(link.href) ? "text-primary" : ""
-                    }`}
+                    onClick={(e) => handleNavClick(e, link)}
+                    className="text-gray-300 hover:text-white transition-colors cursor-pointer"
                   >
                     {link.name}
-                  </Link>
+                  </a>
                 ))}
               </div>
 
@@ -102,19 +121,14 @@ export const Navbar = () => {
                 <div className="md:hidden overflow-hidden border-t border-white/10">
                   <div className="py-4 space-y-2">
                     {navLinks.map((link) => (
-                      <Link
+                      <a
                         key={link.name}
                         href={link.href}
-                        onClick={(e) => {
-                          handleHashLinkClick(e, link.href);
-                          setIsMobileMenuOpen(false);
-                        }}
-                        className={`block py-3 text-gray-300 hover:text-white transition-colors ${
-                          isActiveLink(link.href) ? "text-primary" : ""
-                        }`}
+                        onClick={(e) => handleNavClick(e, link)}
+                        className="block py-3 text-gray-300 hover:text-white transition-colors cursor-pointer"
                       >
                         {link.name}
-                      </Link>
+                      </a>
                     ))}
 
                     <button

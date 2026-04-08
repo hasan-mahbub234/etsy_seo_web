@@ -1,8 +1,11 @@
 "use client";
 
 import { ArrowRight, Star, Shield } from "lucide-react";
+import { useState } from "react";
+import RankingModal from "./RankingModal";
 
 export const CTA = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <section className="py-20 bg-gradient-to-br from-primary/20 via-secondary to-secondary">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -17,11 +20,11 @@ export const CTA = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <button className="bg-primary hover:bg-orange-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 inline-flex items-center gap-2">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="bg-primary hover:bg-orange-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 inline-flex items-center gap-2"
+            >
               Rank My Product <ArrowRight size={20} />
-            </button>
-            <button className="border border-white/20 hover:border-primary px-8 py-4 rounded-lg font-semibold text-lg transition-all">
-              Watch Demo
             </button>
           </div>
 
@@ -41,6 +44,10 @@ export const CTA = () => {
           </div>
         </div>
       </div>
+      <RankingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 };

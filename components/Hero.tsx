@@ -1,11 +1,21 @@
 "use client";
 
 import { Play, ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import RankingModal from "./RankingModal";
 
 export const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handlePlayClick = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
   return (
     <section className="relative sm:min-h-screen flex items-center pt-20 sm:pt-20 overflow-hidden">
       {/* Background gradient */}
@@ -23,18 +33,24 @@ export const Hero = () => {
           </div>
 
           {/* Video Preview - Centered */}
-          <div className="relative group cursor-pointer w-full max-w-7xl mx-auto">
+          <div className="relative group w-full max-w-7xl mx-auto">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-video">
-              <img
-                src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&h=450&fit=crop"
-                alt="Video preview"
+              <video
+                ref={videoRef}
+                src="/ETSY LISTMAGIC.mp4"
                 className="w-full h-full object-cover"
+                controls={isPlaying}
               />
-              <div className="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:bg-black/40 transition-all">
-                <div className="w-14 h-14 sm:w-20 sm:h-20 bg-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Play size={28} className="sm:w-8 sm:h-8 ml-0.5 sm:ml-1" />
+              {!isPlaying && (
+                <div
+                  className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/40 transition-all cursor-pointer"
+                  onClick={handlePlayClick}
+                >
+                  <div className="w-8 h-8 sm:w-14 sm:h-14 bg-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Play size={20} className="sm:w-8 sm:h-8 ml-0.5 sm:ml-1" />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
             <div className="absolute -bottom-4 -right-4 w-24 h-24 sm:w-32 sm:h-32 bg-primary/20 rounded-full blur-2xl" />
           </div>
