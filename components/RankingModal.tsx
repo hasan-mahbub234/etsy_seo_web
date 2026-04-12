@@ -15,16 +15,61 @@ export default function RankingModal({ isOpen, onClose }: Props) {
     keyword2: "",
     keyword3: "",
   });
+  const [urlError, setUrlError] = useState("");
 
   if (!isOpen) return null;
 
+  const validateEtsyUrl = (url: string): boolean => {
+    if (!url) return false;
+
+    const urlLower = url.toLowerCase().trim();
+
+    // Check if it's an Etsy URL
+    const etsyPattern = /^(https?:\/\/)?(www\.)?etsy\.com\/listing\/\d+/i;
+
+    // Also accept etsy.me short links
+    const etsyShortPattern = /^(https?:\/\/)?etsy\.me\/[a-zA-Z0-9]+/i;
+
+    return etsyPattern.test(urlLower) || etsyShortPattern.test(urlLower);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+
+    // Clear URL error when user starts typing
+    if (name === "url") {
+      setUrlError("");
+    }
+  };
+
+  const handleUrlBlur = () => {
+    if (form.url && !validateEtsyUrl(form.url)) {
+      setUrlError(
+        "Please enter a valid Etsy listing URL (e.g., etsy.com/listing/... or etsy.me/...)",
+      );
+    }
   };
 
   const handleSubmit = () => {
-    if (!form.url || !form.keyword1) {
-      alert("Please fill the Etsy URL and at least one keyword.");
+    // Reset any previous URL error
+    setUrlError("");
+
+    // Validate URL
+    if (!form.url) {
+      setUrlError("Please enter your Etsy listing URL");
+      return;
+    }
+
+    if (!validateEtsyUrl(form.url)) {
+      setUrlError(
+        "Please enter a valid Etsy listing URL (e.g., etsy.com/listing/... or etsy.me/...)",
+      );
+      return;
+    }
+
+    if (!form.keyword1) {
+      alert("Please fill at least one keyword option.");
       return;
     }
 
@@ -35,8 +80,8 @@ export default function RankingModal({ isOpen, onClose }: Props) {
 🔑 Keywords:
 
 1. ${form.keyword1}
-2. ${form.keyword2}
-3. ${form.keyword3}
+2. ${form.keyword2 || "N/A"}
+3. ${form.keyword3 || "N/A"}
    `;
 
     const phoneNumber = "+8801863360191";
@@ -71,7 +116,7 @@ export default function RankingModal({ isOpen, onClose }: Props) {
                 htmlFor="etsy-url"
                 className="text-sm text-gray-300 block mb-2"
               >
-                Etsy Listing URL
+                Etsy Listing URL <span className="text-orange-500">*</span>
               </label>
               <input
                 type="text"
@@ -80,9 +125,26 @@ export default function RankingModal({ isOpen, onClose }: Props) {
                 placeholder="www.etsy.com/listing/123456789"
                 value={form.url}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg bg-[#1a1a1a] border border-[#333] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                onBlur={handleUrlBlur}
+                className={`w-full px-4 py-3 rounded-lg bg-[#1a1a1a] border text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+                  urlError ? "border-red-500" : "border-[#333]"
+                }`}
                 aria-label="Etsy listing URL"
+                aria-invalid={!!urlError}
+                aria-describedby={urlError ? "url-error" : undefined}
               />
+              {urlError && (
+                <p
+                  id="url-error"
+                  className="mt-2 text-sm text-red-500"
+                  role="alert"
+                >
+                  {urlError}
+                </p>
+              )}
+              <p className="mt-1 text-xs text-gray-500">
+                Example: etsy.com/listing/123456789 or etsy.me/abc123
+              </p>
             </div>
 
             <hr className="border-[#2a2a2a]" />
@@ -96,7 +158,7 @@ export default function RankingModal({ isOpen, onClose }: Props) {
                 htmlFor="keyword1"
                 className="text-sm text-gray-400 block mb-2"
               >
-                Keyword Option #1
+                Keyword Option #1 <span className="text-orange-500">*</span>
               </label>
               <input
                 type="text"
@@ -107,6 +169,7 @@ export default function RankingModal({ isOpen, onClose }: Props) {
                 onChange={handleChange}
                 className="w-full px-4 py-3 rounded-lg bg-[#1a1a1a] border border-[#333] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 aria-label="First keyword option"
+                required
               />
             </div>
 
@@ -115,7 +178,8 @@ export default function RankingModal({ isOpen, onClose }: Props) {
                 htmlFor="keyword2"
                 className="text-sm text-gray-400 block mb-2"
               >
-                Keyword Option #2
+                Keyword Option #2{" "}
+                <span className="text-gray-600">(Optional)</span>
               </label>
               <input
                 type="text"
@@ -134,7 +198,8 @@ export default function RankingModal({ isOpen, onClose }: Props) {
                 htmlFor="keyword3"
                 className="text-sm text-gray-400 block mb-2"
               >
-                Keyword Option #3
+                Keyword Option #3{" "}
+                <span className="text-gray-600">(Optional)</span>
               </label>
               <input
                 type="text"
@@ -150,7 +215,7 @@ export default function RankingModal({ isOpen, onClose }: Props) {
 
             <button
               type="submit"
-              className="w-full mt-4 py-3 rounded-lg bg-orange-500 hover:bg-orange-600 transition text-white font-semibold text-lg"
+              className="w-full mt-4 py-3 rounded-lg bg-orange-500 hover:bg-orange-600 transition text-white font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="Submit via WhatsApp"
             >
               Continue via WhatsApp
