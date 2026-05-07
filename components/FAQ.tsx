@@ -32,8 +32,7 @@ const faqs = [
   },
   {
     question: "Can I use this for multiple shops?",
-    answer:
-      "Yes You Can! Our tool supports multiple Etsy shops. You can manage all your stores from a single dashboard and track performance across all your brands.",
+    answer: "Yes you can.",
   },
 ];
 

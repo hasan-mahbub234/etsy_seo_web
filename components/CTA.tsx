@@ -12,8 +12,8 @@ export const CTA = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div>
           <h2 className="text-3xl sm:text-5xl font-bold mb-6">
-            THE TOOL THAT TOP <span className="text-primary">0.1%</span> SELLERS
-            USE
+            THE SECRET THAT TOP <span className="text-primary">0.1%</span>{" "}
+            SELLERS USE
           </h2>
           <p className="text-xl text-gray-300 mb-8">
             Join thousands of successful Etsy sellers who have transformed their

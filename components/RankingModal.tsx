@@ -84,7 +84,7 @@ export default function RankingModal({ isOpen, onClose }: Props) {
 3. ${form.keyword3 || "N/A"}
    `;
 
-    const phoneNumber = "+8801863360191";
+    const phoneNumber = "+447576529800";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
   };

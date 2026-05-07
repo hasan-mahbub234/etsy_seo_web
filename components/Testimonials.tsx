@@ -36,9 +36,6 @@ const chatTestimonials = [
   {
     image: "/images/section_3.7.jpeg",
   },
-  {
-    image: "/images/section_3.8.jpeg",
-  },
 ];
 
 const reviewCards = [
